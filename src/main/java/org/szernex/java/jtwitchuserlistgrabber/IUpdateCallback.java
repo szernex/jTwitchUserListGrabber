@@ -21,12 +21,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+
 package org.szernex.java.jtwitchuserlistgrabber;
 
-import java.io.IOException;
+import java.util.Map;
 
-public class Main {
-	public static void main(String[] args) throws IOException {
-		GUI.main(args);
-	}
+interface IUpdateCallback {
+	void update(Map<String, Object> bundle);
 }

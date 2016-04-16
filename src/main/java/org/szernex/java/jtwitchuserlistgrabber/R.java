@@ -23,10 +23,13 @@ SOFTWARE.
 
 package org.szernex.java.jtwitchuserlistgrabber;
 
-import java.io.IOException;
+public final class R {
+	public static final class gui {
+		public static final int DELAY_USERLIST_POLL = 30;
+		public static final int DELAY_GUI_UPDATE = 32;
+	}
 
-public class Main {
-	public static void main(String[] args) throws IOException {
-		GUI.main(args);
+	public static final class bundle {
+		public static final String KEY_USERLIST = "userlist";
 	}
 }

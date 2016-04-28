@@ -16,14 +16,14 @@ dependencies {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'org.szernex.java.jtwitchuserlistgrabber.Main'
+        attributes 'Main-Class': 'org.szernex.java.jtwitchuserlistgrabber.GUI'
         attributes 'Version': version
     }
 }
 
 task fatJar(type: Jar) {
     manifest {
-        attributes 'Main-Class': 'org.szernex.java.jtwitchuserlistgrabber.Main'
+        attributes 'Main-Class': 'org.szernex.java.jtwitchuserlistgrabber.GUI'
         attributes 'Version': version
     }
 

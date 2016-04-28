@@ -24,9 +24,11 @@ SOFTWARE.
 package org.szernex.java.jtwitchuserlistgrabber;
 
 public final class R {
+	public static final String CONFIG_FILE = "jtwitchuserlistgrabber.json";
+
 	public static final class gui {
 		public static final int DELAY_USERLIST_POLL = 30;
-		public static final int DELAY_GUI_UPDATE = 32;
+		public static final int DELAY_GUI_UPDATE = 5;
 	}
 
 	public static final class bundle {

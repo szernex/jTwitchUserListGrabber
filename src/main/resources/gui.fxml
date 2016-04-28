@@ -35,7 +35,7 @@
 			GridPane.rowSpan="1"/>
 
 	<Label fx:id="lblLastUpdated"
-			Text="Last updated: "
+			Text=""
 			GridPane.columnIndex="0"
 			GridPane.rowIndex="2"
 			GridPane.columnSpan="3"

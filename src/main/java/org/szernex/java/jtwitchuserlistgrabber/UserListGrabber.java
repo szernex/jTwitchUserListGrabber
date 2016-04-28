@@ -29,14 +29,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.*;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 class UserListGrabber implements Runnable {
-	private IUpdateCallback callback = null;
 	private String userName = "";
+	private Set<String> userList = new TreeSet<>();
 
-	void setCallback(IUpdateCallback callback) {
-		this.callback = callback;
+	public Set<String> getUserList() {
+		return userList;
 	}
 
 	void setUserName(String userName) {
@@ -45,7 +47,7 @@ class UserListGrabber implements Runnable {
 
 	@Override
 	public void run() {
-		if (userName != null && userName.length() > 0 && callback != null) {
+		if (userName != null && userName.length() > 0) {
 			final Set<String> users = new TreeSet<>();
 			String tmi_url = String.format("http://tmi.twitch.tv/group/user/%s/chatters", userName);
 
@@ -66,10 +68,8 @@ class UserListGrabber implements Runnable {
 				ex.printStackTrace();
 			}
 
-			Map<String, Object> bundle = new HashMap<>();
-			bundle.put(R.bundle.KEY_USERLIST, new ArrayList<>(users));
-
-			callback.update(bundle);
+			userList.clear();
+			userList.addAll(users);
 		}
 	}
 

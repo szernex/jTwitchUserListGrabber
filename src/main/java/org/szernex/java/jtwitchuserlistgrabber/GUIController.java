@@ -39,17 +39,16 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 import java.util.ResourceBundle;
 
-public class GUIController implements Initializable, IUpdateCallback {
+public class GUIController implements Initializable {
 	@FXML
 	public TextField tfUsername;
 
 	@FXML
 	public ListView<String> lvUserList;
 	private ObservableList<String> userList = FXCollections.observableArrayList();
-	private int userListHash = -1;
+	private int lastUserListHash = -1;
 
 	@FXML
 	public Label lblLastUpdated;
@@ -60,11 +59,8 @@ public class GUIController implements Initializable, IUpdateCallback {
 
 	@FXML
 	public void updateUsername() {
-		System.out.println("-- GUIController.updateUsername");
-
 		config.username = tfUsername.getText();
 		startUpdateThread();
-		updateGui();
 	}
 
 	private synchronized void startUpdateThread() {
@@ -75,34 +71,30 @@ public class GUIController implements Initializable, IUpdateCallback {
 				return;
 		}
 
-		userListGrabber.setUserName(tfUsername.getText().toLowerCase());
+		userListGrabber.setUserName(config.username.toLowerCase());
 		lastThread = new Thread(userListGrabber);
 		lastThread.start();
 	}
 
 	private void updateGui() {
-		if (userList != null && userList.hashCode() != userListHash) {
-			userListHash = userList.hashCode();
+		if (userList != null && userListGrabber.getUserList().hashCode() != lastUserListHash) {
+			ArrayList<String> list = new ArrayList<>(userListGrabber.getUserList());
+			String lastSelected = lvUserList.getSelectionModel().getSelectedItem();
+
+			lastUserListHash = userListGrabber.getUserList().hashCode();
+			userList.clear();
+			userList.addAll(list);
+			lvUserList.getSelectionModel().select(lastSelected);
 			lblLastUpdated.setText(String.format("%d users. Last updated: %s",
 					userList.size(), new SimpleDateFormat("HH:mm:ss yyyy-MM-dd").format(new Date(System.currentTimeMillis()))));
 		}
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public void update(Map<String, Object> bundle) {
-		System.out.println("update");
-		userList.removeAll();
-		userList.addAll((ArrayList<String>) bundle.get(R.bundle.KEY_USERLIST));
-	}
-
-	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("-- GUIController.initialize");
-
 		config = Config.getGlobalConfig();
-		userListGrabber.setCallback(this);
 		lvUserList.setItems(userList);
+		tfUsername.setText(config.username);
 
 		Timeline poll_timeline = new Timeline(
 				new KeyFrame(

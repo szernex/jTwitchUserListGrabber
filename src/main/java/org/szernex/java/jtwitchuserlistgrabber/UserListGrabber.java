@@ -21,7 +21,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-
 package org.szernex.java.jtwitchuserlistgrabber;
 
 import com.google.gson.Gson;
@@ -46,7 +45,7 @@ class UserListGrabber implements Runnable {
 
 	@Override
 	public void run() {
-		if (userName != null && userName.length() > 0) {
+		if (userName != null && userName.length() > 0 && callback != null) {
 			final Set<String> users = new TreeSet<>();
 			String tmi_url = String.format("http://tmi.twitch.tv/group/user/%s/chatters", userName);
 
@@ -68,7 +67,7 @@ class UserListGrabber implements Runnable {
 			}
 
 			Map<String, Object> bundle = new HashMap<>();
-			bundle.put(R.bundle.KEY_USERLIST, users);
+			bundle.put(R.bundle.KEY_USERLIST, new ArrayList<>(users));
 
 			callback.update(bundle);
 		}

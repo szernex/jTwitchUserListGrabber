@@ -44,8 +44,6 @@ public class GUI extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		System.out.println("-- start()");
-
 		config = Config.getGlobalConfig();
 
 		if (config == null) {
@@ -53,18 +51,20 @@ public class GUI extends Application {
 		}
 
 		Parent root = FXMLLoader.load(ClassLoader.getSystemResource("gui.fxml"));
+		Scene scene = new Scene(root, 0, 0);
 
 		mainStage = primaryStage;
 		mainStage.setTitle("jTwitchUserListGrabber");
-		mainStage.setScene(new Scene(root, config.width, config.height));
 		mainStage.setX(config.pos_x);
 		mainStage.setY(config.pos_y);
+		mainStage.setWidth(config.width);
+		mainStage.setHeight(config.height);
+		mainStage.setScene(scene);
 		mainStage.show();
 	}
 
 	@Override
 	public void stop() throws Exception {
-		System.out.println("-- stop()");
 		System.out.println("Stopping application, saving config");
 
 		config.pos_x = mainStage.getX();

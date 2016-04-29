@@ -3,41 +3,46 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<GridPane xmlns:fx="http://javafx.com/fxml"
-		fx:controller="org.szernex.java.jtwitchuserlistgrabber.GUIController"
-		alignment="center"
-		hgap="10"
-		vgap="10">
-	<padding>
-		<Insets top="15" right="15" bottom="15" left="15"/>
-	</padding>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+		fx:controller="org.szernex.java.jtwitchuserlistgrabber.GUIController">
+	<GridPane alignment="center"
+			hgap="10"
+			vgap="10"
+			AnchorPane.topAnchor="0.0"
+			AnchorPane.rightAnchor="0.0"
+			AnchorPane.bottomAnchor="0.0"
+			AnchorPane.leftAnchor="0.0">
+		<padding>
+			<Insets top="15" right="15" bottom="15" left="15"/>
+		</padding>
 
-	<Label text="Username"
-			GridPane.columnIndex="0"
-			GridPane.rowIndex="0"/>
+		<Label text="Username"
+				GridPane.columnIndex="0"
+				GridPane.rowIndex="0"/>
 
-	<TextField fx:id="tfUsername"
-			GridPane.hgrow="ALWAYS"
-			GridPane.columnIndex="1"
-			GridPane.rowIndex="0"/>
+		<TextField fx:id="tfUsername"
+				GridPane.hgrow="ALWAYS"
+				GridPane.columnIndex="1"
+				GridPane.rowIndex="0"/>
 
-	<Button text="Update"
-			onAction="#updateUsername"
-			GridPane.columnIndex="2"
-			GridPane.rowIndex="0"/>
+		<Button text="Update"
+				onAction="#updateUsername"
+				GridPane.columnIndex="2"
+				GridPane.rowIndex="0"/>
 
-	<ListView fx:id="lvUserList"
-			GridPane.hgrow="ALWAYS"
-			GridPane.vgrow="ALWAYS"
-			GridPane.columnIndex="0"
-			GridPane.rowIndex="1"
-			GridPane.columnSpan="3"
-			GridPane.rowSpan="1"/>
+		<ListView fx:id="lvUserList"
+				GridPane.hgrow="ALWAYS"
+				GridPane.vgrow="ALWAYS"
+				GridPane.columnIndex="0"
+				GridPane.rowIndex="1"
+				GridPane.columnSpan="3"
+				GridPane.rowSpan="1"/>
 
-	<Label fx:id="lblLastUpdated"
-			Text=""
-			GridPane.columnIndex="0"
-			GridPane.rowIndex="2"
-			GridPane.columnSpan="3"
-			GridPane.rowSpan="1"/>
-</GridPane>
+		<Label fx:id="lblLastUpdated"
+				Text=""
+				GridPane.columnIndex="0"
+				GridPane.rowIndex="2"
+				GridPane.columnSpan="3"
+				GridPane.rowSpan="1"/>
+	</GridPane>
+</AnchorPane>
